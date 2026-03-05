@@ -1,0 +1,408 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── Reset & Base ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-base: #09090b;
+  --bg-surface: #111113;
+  --bg-elevated: #18181b;
+  --bg-border: #27272a;
+  --accent: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.35);
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --orange: #f97316;
+  --red: #ef4444;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Page Layout ───────────────────────────────────────────────────────────── */
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem 3rem;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99, 102, 241, 0.15) 0%, transparent 70%),
+    var(--bg-base);
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #fff 30%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-icon {
+  -webkit-text-fill-color: initial;
+}
+
+.page-sub {
+  margin-top: .5rem;
+  font-size: .875rem;
+  color: var(--text-muted);
+  letter-spacing: .05em;
+}
+
+/* ─── Player ────────────────────────────────────────────────────────────────── */
+.player-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  border-radius: var(--radius);
+  border: 1px solid var(--bg-border);
+  background: var(--bg-surface);
+  box-shadow:
+    0 0 0 1px rgba(99, 102, 241, .1),
+    0 20px 60px rgba(0, 0, 0, .6),
+    0 0 80px var(--accent-glow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Header bar ────────────────────────────────────────────────────────────── */
+.player-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1.25rem;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--bg-border);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cam-info {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.cam-icon {
+  font-size: 1rem;
+}
+
+.cam-name {
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.status-group {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+/* ─── Badges ─────────────────────────────────────────────────────────────────── */
+.badge {
+  font-size: .72rem;
+  font-weight: 600;
+  padding: .25rem .65rem;
+  border-radius: 999px;
+  letter-spacing: .04em;
+}
+
+.badge.resolution {
+  background: rgba(99, 102, 241, .15);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, .3);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.badge.frame-count {
+  background: rgba(34, 197, 94, .1);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, .25);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.badge.status-badge {
+  position: relative;
+  padding-left: 1.4rem;
+  background: color-mix(in srgb, var(--dot-color) 12%, transparent);
+  color: var(--dot-color);
+  border: 1px solid color-mix(in srgb, var(--dot-color) 35%, transparent);
+}
+
+.badge.status-badge::before {
+  content: '';
+  position: absolute;
+  left: .55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dot-color);
+  box-shadow: 0 0 6px var(--dot-color);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+
+  50% {
+    opacity: .5;
+    transform: translateY(-50%) scale(.7);
+  }
+}
+
+/* ─── Canvas area ─────────────────────────────────────────────────────────── */
+.canvas-area {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Broadway.js injects its own canvas; make it fill the area */
+.canvas-area canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+}
+
+/* ─── Overlay (connecting / error) ─────────────────────────────────────────── */
+.overlay-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(0, 0, 0, .65);
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.overlay-center p {
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(255, 255, 255, .1);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
+.player-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: .6rem 1.25rem;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--bg-border);
+  font-size: .72rem;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── Recording indicator (inside canvas) ───────────────────────────────── */
+.rec-indicator {
+  position: absolute;
+  top: .9rem;
+  left: .9rem;
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .3rem .75rem .3rem .55rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, .7);
+  border: 1px solid rgba(239, 68, 68, .45);
+  backdrop-filter: blur(3px);
+  z-index: 20;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .75rem;
+  font-weight: 600;
+  color: #fca5a5;
+}
+
+.rec-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 8px var(--red);
+  animation: pulse 1s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.rec-text {
+  color: #fff;
+}
+
+.rec-size {
+  color: var(--text-muted);
+  font-size: .68rem;
+}
+
+/* ─── Control bar ────────────────────────────────────────────────────────── */
+.control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .65rem 1.25rem;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--bg-border);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.control-left {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.control-right {
+  display: flex;
+  align-items: center;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.btn-icon {
+  font-size: .9rem;
+}
+
+.btn-record {
+  background: rgba(239, 68, 68, .12);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, .35);
+}
+
+.btn-record:not(:disabled):hover {
+  background: rgba(239, 68, 68, .22);
+  border-color: rgba(239, 68, 68, .6);
+  box-shadow: 0 0 12px rgba(239, 68, 68, .25);
+}
+
+.btn-stop {
+  background: rgba(239, 68, 68, .8);
+  color: #fff;
+  border-color: #ef4444;
+  animation: glow-red 1.5s ease-in-out infinite;
+}
+
+.btn-stop:hover {
+  background: #ef4444;
+}
+
+@keyframes glow-red {
+
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(239, 68, 68, .4);
+  }
+
+  50% {
+    box-shadow: 0 0 18px rgba(239, 68, 68, .7);
+  }
+}
+
+.btn-saving {
+  background: rgba(99, 102, 241, .12);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, .3);
+  gap: .6rem;
+}
+
+/* ─── Small spinner (inside button) ─────────────────────────────────────── */
+.spinner-sm {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(165, 180, 252, .3);
+  border-top-color: #a5b4fc;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  flex-shrink: 0;
+}
+
+/* ─── Last saved notification ────────────────────────────────────────────── */
+.saved-info {
+  font-size: .75rem;
+  color: #86efac;
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(34, 197, 94, .08);
+  border: 1px solid rgba(34, 197, 94, .2);
+  padding: .25rem .65rem;
+  border-radius: var(--radius-sm);
+}
+
+.saved-info strong {
+  font-weight: 600;
+  color: #bbf7d0;
+}
