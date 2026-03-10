@@ -9,11 +9,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "electron": "electron ."
+    "electron": "electron .",
+    "postinstall": "node patches/yellowstone-digest-fix.js"
   },
   "dependencies": {
     "@types/ws": "^8.18.1",
     "next": "16.1.6",
+    "onvif": "^0.8.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "ws": "^8.19.0",

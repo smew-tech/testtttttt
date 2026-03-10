@@ -406,3 +406,401 @@ body {
   font-weight: 600;
   color: #bbf7d0;
 }
+
+/* ─── Connection Type Badge (in player header) ─────────────────────────── */
+.badge.conn-type-badge {
+  background: rgba(99, 102, 241, .1);
+  color: #c4b5fd;
+  border: 1px solid rgba(99, 102, 241, .25);
+  font-size: .68rem;
+}
+
+/* ─── Idle Message (in canvas overlay) ─────────────────────────────────── */
+.idle-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+}
+
+.idle-icon {
+  font-size: 2.5rem;
+  opacity: .6;
+}
+
+.idle-message p {
+  color: var(--text-muted) !important;
+  font-size: .85rem;
+  text-align: center;
+}
+
+/* ─── Camera Connect Panel ─────────────────────────────────────────────── */
+.connect-panel {
+  width: 100%;
+  max-width: 1100px;
+  border-radius: var(--radius);
+  border: 1px solid var(--bg-border);
+  background: var(--bg-surface);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.connect-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1.25rem;
+  background: var(--bg-elevated);
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid var(--bg-border);
+}
+
+.connect-title-group {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.connect-icon {
+  font-size: 1.1rem;
+}
+
+.connect-title {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.connect-badge-live {
+  background: rgba(34, 197, 94, .12);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, .3);
+}
+
+.connect-chevron {
+  font-size: .8rem;
+  color: var(--text-muted);
+  transition: transform .2s ease;
+}
+
+.connect-chevron.open {
+  transform: rotate(180deg);
+}
+
+.connect-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ─── Connection Type Grid ─────────────────────────────────────────────── */
+.conn-type-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .75rem;
+}
+
+@media (max-width: 700px) {
+  .conn-type-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.conn-type-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  padding: .9rem .6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--bg-border);
+  background: var(--bg-elevated);
+  cursor: pointer;
+  transition: all .15s ease;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.conn-type-card:hover {
+  border-color: rgba(99, 102, 241, .4);
+  background: rgba(99, 102, 241, .06);
+}
+
+.conn-type-card.active {
+  border-color: var(--accent);
+  background: rgba(99, 102, 241, .12);
+  box-shadow: 0 0 12px rgba(99, 102, 241, .2);
+}
+
+.conn-type-icon {
+  font-size: 1.5rem;
+}
+
+.conn-type-label {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.conn-type-desc {
+  font-size: .68rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* ─── Form Sections ────────────────────────────────────────────────────── */
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--bg-border);
+}
+
+.form-section-title {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: .15rem;
+}
+
+.form-row {
+  display: flex;
+  gap: .75rem;
+  align-items: flex-end;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.form-group label {
+  font-size: .72rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.form-group input,
+.form-group select,
+.preset-select {
+  padding: .5rem .75rem;
+  border-radius: 6px;
+  border: 1px solid var(--bg-border);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-size: .82rem;
+  font-family: 'JetBrains Mono', monospace;
+  outline: none;
+  transition: border-color .15s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.preset-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, .15);
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.preset-select {
+  cursor: pointer;
+}
+
+/* ─── Toggle label ─────────────────────────────────────────────────────── */
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+  font-size: .8rem;
+  color: var(--text-secondary);
+}
+
+.toggle-label input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 14px;
+  height: 14px;
+}
+
+/* ─── ONVIF Device List ────────────────────────────────────────────────── */
+.onvif-devices {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.onvif-device {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .6rem .85rem;
+  border-radius: 6px;
+  border: 1px solid var(--bg-border);
+  background: var(--bg-base);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+
+.onvif-device:hover {
+  border-color: rgba(99, 102, 241, .4);
+}
+
+.onvif-device.selected {
+  border-color: var(--accent);
+  background: rgba(99, 102, 241, .08);
+}
+
+.onvif-device-name {
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.onvif-device-info {
+  font-size: .72rem;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── Analog info box ──────────────────────────────────────────────────── */
+.analog-info {
+  padding: .75rem 1rem;
+  border-radius: 6px;
+  background: rgba(245, 158, 11, .06);
+  border: 1px solid rgba(245, 158, 11, .2);
+  font-size: .78rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.analog-info ul {
+  margin: .5rem 0;
+  padding-left: 1.25rem;
+}
+
+.analog-info li {
+  margin-bottom: .3rem;
+}
+
+.analog-info strong {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+/* ─── Test Result ──────────────────────────────────────────────────────── */
+.test-result {
+  padding: .55rem 1rem;
+  border-radius: 6px;
+  font-size: .8rem;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.test-result.success {
+  background: rgba(34, 197, 94, .08);
+  border: 1px solid rgba(34, 197, 94, .25);
+  color: #86efac;
+}
+
+.test-result.error {
+  background: rgba(239, 68, 68, .08);
+  border: 1px solid rgba(239, 68, 68, .25);
+  color: #fca5a5;
+}
+
+/* ─── Action Buttons ───────────────────────────────────────────────────── */
+.connect-actions {
+  display: flex;
+  gap: .75rem;
+  justify-content: flex-end;
+}
+
+.btn-test {
+  background: rgba(99, 102, 241, .1);
+  color: #a5b4fc;
+  border-color: rgba(99, 102, 241, .3);
+}
+
+.btn-test:not(:disabled):hover {
+  background: rgba(99, 102, 241, .2);
+  border-color: rgba(99, 102, 241, .5);
+}
+
+.btn-connect {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.btn-connect:hover {
+  background: #818cf8;
+  box-shadow: 0 0 16px rgba(99, 102, 241, .4);
+}
+
+.btn-disconnect {
+  background: rgba(239, 68, 68, .1);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, .3);
+  padding: .35rem .85rem;
+  border-radius: var(--radius-sm);
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn-disconnect:hover {
+  background: rgba(239, 68, 68, .2);
+  border-color: rgba(239, 68, 68, .5);
+}
+
+.btn-discover {
+  background: rgba(99, 102, 241, .12);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, .3);
+  padding: .5rem 1rem;
+  border-radius: 6px;
+  font-size: .8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s ease;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.btn-discover:not(:disabled):hover {
+  background: rgba(99, 102, 241, .22);
+  border-color: rgba(99, 102, 241, .5);
+}
+
+.btn-discover:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}

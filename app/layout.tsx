@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'RTSP Camera Viewer',
-  description: 'Live RTSP camera stream in browser — no FFmpeg',
+  title: 'Camera Viewer — Multi-Protocol',
+  description: 'Live camera stream — Wi-Fi, Ethernet, Analog (BNC), ONVIF — no FFmpeg',
 };
 
 export default function RootLayout({
